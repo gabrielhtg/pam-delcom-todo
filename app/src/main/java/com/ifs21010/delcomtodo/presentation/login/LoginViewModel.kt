@@ -1,5 +1,6 @@
 package com.ifs21010.delcomtodo.presentation.login
 
+import com.ifs21010.delcomtodo.presentation.ViewModelFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -7,7 +8,6 @@ import com.ifs21010.delcomtodo.data.pref.UserModel
 import com.ifs21010.delcomtodo.data.remote.MyResult
 import com.ifs21010.delcomtodo.data.remote.response.DataLoginResponse
 import com.ifs21010.delcomtodo.data.repository.AuthRepository
-import com.ifs21010.delcomtodo.presentation.ViewModelFactory
 
 class LoginViewModel(
     private val authRepository: AuthRepository,

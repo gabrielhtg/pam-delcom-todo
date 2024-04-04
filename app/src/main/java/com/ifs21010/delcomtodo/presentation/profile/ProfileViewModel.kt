@@ -1,5 +1,6 @@
 package com.ifs21010.delcomtodo.presentation.profile
 
+import com.ifs21010.delcomtodo.presentation.ViewModelFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -8,7 +9,6 @@ import com.ifs21010.delcomtodo.data.remote.MyResult
 import com.ifs21010.delcomtodo.data.remote.response.DataUserResponse
 import com.ifs21010.delcomtodo.data.repository.AuthRepository
 import com.ifs21010.delcomtodo.data.repository.UserRepository
-import com.ifs21010.delcomtodo.presentation.ViewModelFactory
 import kotlinx.coroutines.launch
 class ProfileViewModel(
     private val authRepository: AuthRepository,

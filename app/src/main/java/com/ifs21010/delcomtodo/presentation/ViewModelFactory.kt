@@ -1,5 +1,6 @@
 package com.ifs21010.delcomtodo.presentation
 
+import MainViewModel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -8,9 +9,9 @@ import com.ifs21010.delcomtodo.data.repository.TodoRepository
 import com.ifs21010.delcomtodo.data.repository.UserRepository
 import com.ifs21010.delcomtodo.di.Injection
 import com.ifs21010.delcomtodo.presentation.login.LoginViewModel
-import com.ifs21010.delcomtodo.presentation.main.MainViewModel
 import com.ifs21010.delcomtodo.presentation.profile.ProfileViewModel
 import com.ifs21010.delcomtodo.presentation.register.RegisterViewModel
+import com.ifs21010.delcomtodo.presentation.todo.TodoViewModel
 
 class ViewModelFactory(
     private val authRepository: AuthRepository,
@@ -24,32 +25,29 @@ class ViewModelFactory(
                 RegisterViewModel
                     .getInstance(authRepository) as T
             }
-
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel
                     .getInstance(authRepository) as T
             }
-
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel
-                    .getInstance(authRepository) as T
+                MainViewModel.getInstance(authRepository, todoRepository) as T
             }
-
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel
                     .getInstance(authRepository, userRepository) as T
             }
-
+            modelClass.isAssignableFrom(TodoViewModel::class.java) -> {
+                TodoViewModel
+                    .getInstance(todoRepository) as T
+            }
             else -> throw IllegalArgumentException(
                 "Unknown ViewModel class: " + modelClass.name
             )
         }
     }
-
     companion object {
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
-
         @JvmStatic
         fun getInstance(context: Context): ViewModelFactory {
             synchronized(ViewModelFactory::class.java) {
