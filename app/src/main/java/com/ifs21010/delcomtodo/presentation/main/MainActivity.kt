@@ -23,6 +23,7 @@ import com.ifs21010.delcomtodo.presentation.ViewModelFactory
 import com.ifs21010.delcomtodo.presentation.login.LoginActivity
 import com.ifs21010.delcomtodo.presentation.profile.ProfileActivity
 import com.ifs21010.delcomtodo.presentation.todo.TodoDetailActivity
+import com.ifs21010.delcomtodo.presentation.todo.TodoFavoriteActivity
 import com.ifs21010.delcomtodo.presentation.todo.TodoManageActivity
 
 class MainActivity : AppCompatActivity() {
@@ -72,6 +73,11 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.mainMenuProfile -> {
                     openProfileActivity()
+                    true
+                }
+
+                R.id.mainMenuFavoriteTodos -> {
+                    openFavoriteTodoActivity()
                     true
                 }
 
@@ -197,6 +203,7 @@ class MainActivity : AppCompatActivity() {
             })
             binding.svMain.setOnQueryTextListener(
                 object : SearchView.OnQueryTextListener {
+
                     override fun onQueryTextSubmit(query: String): Boolean {
                         return false
                     }
@@ -248,5 +255,12 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra(TodoManageActivity.KEY_IS_ADD, true)
         launcher.launch(intent)
     }
-}
 
+    private fun openFavoriteTodoActivity() {
+        val intent = Intent(
+            this@MainActivity,
+            TodoFavoriteActivity::class.java
+        )
+        launcher.launch(intent)
+    }
+}

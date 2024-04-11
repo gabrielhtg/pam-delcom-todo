@@ -6,6 +6,7 @@ import com.ifs21010.delcomtodo.data.pref.dataStore
 import com.ifs21010.delcomtodo.data.remote.retrofit.ApiConfig
 import com.ifs21010.delcomtodo.data.remote.retrofit.IApiService
 import com.ifs21010.delcomtodo.data.repository.AuthRepository
+import com.ifs21010.delcomtodo.data.repository.LocalTodoRepository
 import com.ifs21010.delcomtodo.data.repository.TodoRepository
 import com.ifs21010.delcomtodo.data.repository.UserRepository
 import kotlinx.coroutines.flow.first
@@ -20,7 +21,6 @@ object Injection {
     }
 
     fun provideUserRepository(context: Context): UserRepository {
-
         val pref = UserPreference.getInstance(context.dataStore)
         val user = runBlocking { pref.getSession().first() }
         val apiService: IApiService = ApiConfig.getApiService(user.token)
@@ -32,5 +32,9 @@ object Injection {
         val user = runBlocking { pref.getSession().first() }
         val apiService: IApiService = ApiConfig.getApiService(user.token)
         return TodoRepository.getInstance(apiService)
+    }
+
+    fun provideLocalTodoRepository(context: Context): LocalTodoRepository {
+        return LocalTodoRepository.getInstance(context)
     }
 }
